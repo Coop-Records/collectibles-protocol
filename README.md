@@ -1,17 +1,38 @@
-## Foundry
+# Collectibles Protocol
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**A smart contract protocol for managing collectibles on Abstract's testnet, built with Foundry.**
 
 Foundry consists of:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
+- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
+- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
+- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
 ## Documentation
 
 https://book.getfoundry.sh/
+
+## Setup
+
+### Environment Variables
+
+1. Copy the example environment file:
+
+```shell
+cp .env.example .env
+```
+
+2. Update the `.env` file with your configuration:
+
+```shell
+# RPC URLs
+ABSTRACT_TESTNET_RPC_URL=https://api.testnet.abs.xyz
+ABSTRACT_VERIFIER_URL=https://api-sepolia.abscan.org/api
+
+# Deployment
+PRIVATE_KEY=0xyour_private_key_here
+```
 
 ## Usage
 
@@ -39,16 +60,18 @@ $ forge fmt
 $ forge snapshot
 ```
 
-### Anvil
-
-```shell
-$ anvil
-```
-
 ### Deploy
 
+First, make sure your environment variables are loaded:
+
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+source .env
+```
+
+Then run the deployment script:
+
+```shell
+forge script script/Counter.s.sol:CounterScript --rpc-url $ABSTRACT_TESTNET_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --verifier blockscout --verifier-url $ABSTRACT_VERIFIER_URL -vvvv --zksync
 ```
 
 ### Cast
