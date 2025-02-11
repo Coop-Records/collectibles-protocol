@@ -1,11 +1,11 @@
 # Compiler files
 cache/
 out/
+zkout/
 
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
+# Broadcast logs - ignore all except latest
+/broadcast/*/*/*
+!/broadcast/*/*/run-latest.json
 
 # Docs
 docs/
